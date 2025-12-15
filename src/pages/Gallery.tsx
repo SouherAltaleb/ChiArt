@@ -21,6 +21,7 @@ export default function GalleryPage({
     setEditingId(artwork.id);
     setDraftNote(artwork.note ?? "");
   }
+  console.log("Gallery items:", gallery.length);
 
   function cancelEdit() {
     setEditingId(null);
@@ -39,46 +40,70 @@ export default function GalleryPage({
     setDraftNote("");
   }
   return (
-    <div>
-      <h2>Meine Galerie</h2>
+    <div className="flex flex-col gap-8">
+      {/* Titel */}
+      <h2 className="text-3xl font-semibold">Meine Galerie</h2>
 
-      {gallery.length === 0 && <p>Galerie ist leer</p>}
+      {/* Leer-Zustand */}
+      {gallery.length === 0 && <p className="opacity-70">Galerie ist leer</p>}
 
-      <div className="grid">
+      {/* GRID NUR für Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {gallery.map((artwork) => {
           const isEditing = editingId === artwork.id;
 
           return (
             <div
               key={artwork.id}
-              style={{ border: "1px solid #ccc", padding: 12 }}
+              className="  group  bg-white/70  backdrop-blur  rounded-2xl p-6 flex flex-col gap-4 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <ArtworkCard artwork={artwork} />
 
               {!isEditing ? (
                 <>
-                  <p>
+                  <p className="text-sm">
                     <strong>Notiz:</strong> {artwork.note ? artwork.note : "—"}
                   </p>
 
-                  <button onClick={() => startEdit(artwork)}>Bearbeiten</button>
-                  <button onClick={() => onRemove(artwork.id)}>
-                    Entfernen
-                  </button>
+                  <div className="flex gap-3">
+                    <button
+                      className=" flex-1 mt-3 btn-sm rounded-full bg-(--color-lila) text-(--color-dark) p-2 text-sm font-medium transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95 "
+                      onClick={() => startEdit(artwork)}
+                    >
+                      Bearbeiten
+                    </button>
+                    <button
+                      className="flex-1 mt-3 btn-sm rounded-full bg-(--color-hell-rosa) text-(--color-dark) p-2 text-sm font-medium transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95 "
+                      onClick={() => onRemove(artwork.id)}
+                    >
+                      Entfernen
+                    </button>
+                  </div>
                 </>
               ) : (
                 <>
                   <textarea
+                    className="textarea textarea-bordered"
                     value={draftNote}
                     onChange={(e) => setDraftNote(e.target.value)}
                     placeholder="Notiz hinzufügen..."
                     maxLength={200}
                   />
 
-                  <button onClick={() => saveEdit(artwork.id)}>
-                    Speichern
-                  </button>
-                  <button onClick={cancelEdit}>Abbrechen</button>
+                  <div className="flex gap-3">
+                    <button
+                      className="flex-1 mt-3 btn-sm rounded-full bg-(--color-lila) text-(--color-dark) p-2 text-sm font-medium transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95"
+                      onClick={() => saveEdit(artwork.id)}
+                    >
+                      Speichern
+                    </button>
+                    <button
+                      className="flex-1 mt-3 btn-sm rounded-full bg-(--color-hell-rosa) text-(--color-dark) p-2 text-sm font-medium transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95"
+                      onClick={cancelEdit}
+                    >
+                      Abbrechen
+                    </button>
+                  </div>
                 </>
               )}
             </div>
