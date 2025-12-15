@@ -1,2 +1,45 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: false;
+}
+
+/*--------- COLORS ----------*/
+
+:root {
+  --color-dark: #393d3f;
+  --color-vanilla: #f6f6ef;
+  --color-hell-rosa: #fecac5;
+  --color-mint: #b5f2e6;
+
+  --color-lila: #d2baec;
+  --color-aqua-mint: #85d6d0;
+  --color-dark-blue: #1f1a38;
+  --color-blush: #ed8061;
+  --color-light: #fbf8f5;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  color: var(--color-dark);
+
+  background: linear-gradient(
+    135deg,
+    var(--color-lila) 0%,
+    var(--color-hell-rosa) 45%,
+    var(--color-mint) 100%
+  );
+
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 600;
+}

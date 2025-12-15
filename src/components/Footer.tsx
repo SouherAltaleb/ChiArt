@@ -1,9 +1,7 @@
-function Footer() {
+export default function Footer() {
   return (
-    <>
-      <p>Footer </p>
-    </>
+    <footer style={{ borderTop: "2px solid blue", padding: "10px" }}>
+      Footer
+    </footer>
   );
 }
-
-export default Footer;
