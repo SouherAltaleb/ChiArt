@@ -7,6 +7,7 @@ import GalleryPage from "./pages/Gallery";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Home from "./pages/Home";
+import SearchPage from "./pages/Search";
 
 function App() {
   // Gallery state
@@ -52,14 +53,28 @@ function App() {
   //   setQuery(e.target.value);
   //   // console.log(e.target.value);
   // };
-
+  const galleryIds = gallery.map((a) => a.id);
   return (
     <BrowserRouter>
       <Routes>
         {/* LAYOUT ROUTE */}
         <Route path="/" element={<MainLayout />}>
           {/* HOME */}
-          <Route index element={<Home onAddToGallery={addToGallery} />} />
+          <Route
+            index
+            element={
+              <Home onAddToGallery={addToGallery} galleryIds={galleryIds} />
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <SearchPage
+                onAddToGallery={addToGallery}
+                galleryIds={galleryIds}
+              />
+            }
+          />
 
           {/* GALLERY */}
           <Route
