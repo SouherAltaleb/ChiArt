@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { type Artwork } from "./schemas/artworkSchema";
 import { searchArtworks } from "./api/searchArtworks";
+import ArtworkCard from "./components/ArtworkCard";
+
 // import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router';
 
 function App() {
@@ -34,6 +36,11 @@ function App() {
     // console.log(e.target.value);
   };
 
+  // add to gallery/fav
+  function addToGallery(artwork: Artwork) {
+    console.log("Zur Galerie hinzugefügt:", artwork);
+  }
+
   return (
     <div>
       <h1>ChiArt</h1>
@@ -51,13 +58,23 @@ function App() {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {/* Liste rendern, key ist pflicht */}
-      <ul>
+      <div className="grid gab-4 p-6">
+        {artworks.map((artwork) => (
+          <ArtworkCard
+            key={artwork.id}
+            artwork={artwork}
+            onAddToGallery={addToGallery}
+          />
+        ))}
+      </div>
+
+      {/* <ul>
         {artworks.map((artwork) => (
           <li key={artwork.id}>
             <strong>{artwork.title}</strong> – {artwork.artist_title}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
