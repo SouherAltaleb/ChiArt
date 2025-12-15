@@ -1,18 +1,11 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
-function Header() {
+export default function Header() {
   return (
     <header>
       <nav>
-        <Link to="/" className="">
-          Home
-        </Link>
-        <Link to="gallery" className="">
-          Gallery
-        </Link>
+        <Link to="/">Suche</Link> | <Link to="/gallery">Galerie</Link>
       </nav>
     </header>
   );
 }
-
-export default Header;

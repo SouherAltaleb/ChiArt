@@ -1,81 +1,80 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { type Artwork } from "./schemas/artworkSchema";
-import { searchArtworks } from "./api/searchArtworks";
-import ArtworkCard from "./components/ArtworkCard";
 
-// import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router';
+// import SearchPage from "./pages/Search";
+import GalleryPage from "./pages/Gallery";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import Home from "./pages/Home";
 
 function App() {
-  // suche
-  const [query, setQuery] = useState("");
-  // liste der suchergebnisse
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
-  // Loading
-  const [loading, setLoading] = useState(false);
-  // error
-  const [error, setError] = useState<string | null>(null);
+  // Gallery state
+  const [gallery, setGallery] = useState<Artwork[]>([]);
 
-  // Such-Funktion
-  async function handleSearch() {
-    if (!query.trim()) return; //Kein leerer Text erlaubt
+  useEffect(() => {
+    const stored = localStorage.getItem("gallery");
+    if (stored) setGallery(JSON.parse(stored));
+  }, []);
 
-    try {
-      setLoading(true); // loading an
-      setError(null); // alte error löschen
-      const results = await searchArtworks(query); // api wird aufgerufen, wartet auf ergebniss
-      setArtworks(results); // ergebniss im state speichern
-    } catch (err) {
-      setError(" Fehler beim Laden der Daten"); // معالجة الاخطا
-    } finally {
-      setLoading(false); // loading stoppen
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    // console.log(e.target.value);
-  };
-
-  // add to gallery/fav
   function addToGallery(artwork: Artwork) {
-    console.log("Zur Galerie hinzugefügt:", artwork);
+    setGallery((prev) => {
+      if (prev.some((item) => item.id === artwork.id)) return prev;
+      const updated = [...prev, artwork];
+      localStorage.setItem("gallery", JSON.stringify(updated));
+      return updated;
+    });
   }
+
+  // remove aus gallery
+  function removeFromGallery(id: number) {
+    setGallery((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      localStorage.setItem("gallery", JSON.stringify(updated));
+      return updated;
+    });
+  }
+
+  // Note update
+  function updateNote(id: number, note: string) {
+    setGallery((prev) => {
+      const updated = prev.map((artwork) =>
+        artwork.id === id ? { ...artwork, note } : artwork
+      );
+
+      localStorage.setItem("gallery", JSON.stringify(updated));
+      return updated;
+    });
+  }
+
+  // suche input
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setQuery(e.target.value);
+  //   // console.log(e.target.value);
+  // };
 
   return (
-    <div>
-      <h1>ChiArt</h1>
-      <input
-        type="text"
-        placeholder="Künster oder title suchen..."
-        value={query}
-        onChange={handleChange}
-      />
-      <button onClick={handleSearch} className="btn">
-        Suchen
-      </button>
+    <BrowserRouter>
+      <Routes>
+        {/* LAYOUT ROUTE */}
+        <Route path="/" element={<MainLayout />}>
+          {/* HOME */}
+          <Route index element={<Home onAddToGallery={addToGallery} />} />
 
-      {loading && <p>Lade...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {/* Liste rendern, key ist pflicht */}
-      <div className="grid gab-4 p-6">
-        {artworks.map((artwork) => (
-          <ArtworkCard
-            key={artwork.id}
-            artwork={artwork}
-            onAddToGallery={addToGallery}
+          {/* GALLERY */}
+          <Route
+            path="gallery"
+            element={
+              <GalleryPage
+                gallery={gallery}
+                onRemove={removeFromGallery}
+                onUpdateNote={updateNote}
+              />
+            }
           />
-        ))}
-      </div>
-
-      {/* <ul>
-        {artworks.map((artwork) => (
-          <li key={artwork.id}>
-            <strong>{artwork.title}</strong> – {artwork.artist_title}
-          </li>
-        ))}
-      </ul> */}
-    </div>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
