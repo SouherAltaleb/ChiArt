@@ -3,7 +3,7 @@
 // 3.jedes Kunstwerk mit Zod validiert
 // Such-API liefert: id, title, artist_title, image_id
 
-import { ArtworkSchema, Artwork } from "../schemas/artworkSchema";
+import { ArtworkSchema, type Artwork } from "../schemas/artworkSchema";
 
 const API_URL = "https://api.artic.edu/api/v1/artworks/search";
 
