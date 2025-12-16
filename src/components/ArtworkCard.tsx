@@ -14,7 +14,7 @@ export default function ArtworkCard({
 }: ArtworkCardProps) {
   // Bild-URL
   const imageUrl = artwork.image_id
-    ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/800,/0/default.jpg`
+    ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/400,/0/default.jpg`
     : null;
 
   return (
@@ -25,6 +25,7 @@ export default function ArtworkCard({
           <img
             src={imageUrl}
             alt={artwork.title}
+            loading="lazy"
             className="
               h-full
               w-full
