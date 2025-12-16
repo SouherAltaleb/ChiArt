@@ -39,33 +39,21 @@ export default function ArtworkCard({
             Kein Bild
           </div>
         )}
-        {/* add button */}
+        {/* add herz button */}
         {onAddToGallery && (
           <button
             onClick={() => onAddToGallery(artwork)}
             aria-label="Add to gallery"
-            className={`
-      absolute
-      top-3
-      right-3
-      w-10
-      h-10
-      rounded-full
-      flex
-      items-center
-      justify-center
-      backdrop-blur
-      transition
-      duration-300
-      ${
-        isSaved
-          ? "bg-rose-500 text-white scale-110"
-          : "bg-white/80 text-rose-500 hover:bg-rose-500 hover:text-white hover:scale-110"
-      }
-      active:scale-95
-    `}
+            className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center  backdrop-blur  transition duration-300
+                        ${
+                          isSaved
+                            ? "bg-rose-400 text-white scale-110"
+                            : "bg-white/80 text-rose-400 hover:bg-rose-400 hover:text-white hover:scale-110"
+                        }
+                         active:scale-95
+                     `}
           >
-            {isSaved ? "❤️" : "🤍"}
+            {isSaved ? "♥︎" : "♡"}
           </button>
         )}
       </div>
