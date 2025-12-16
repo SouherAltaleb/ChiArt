@@ -39,18 +39,8 @@ export default function Search({
 
   return (
     <div className="flex flex-col gap-10">
-      {/* SEARCH BLOCK */}
-      <section
-        className="
-        rounded-full
-        p-8
-        bg-dark/90
-        text-vanilla
-        flex
-        flex-col
-        gap-6
-      "
-      >
+      {/* SUche block*/}
+      <section className=" rounded-full  px-8 py-4  flex flex-col gap-6">
         {/* Header */}
         {/* <div className="flex items-start justify-between gap-6">
           <div>
@@ -58,71 +48,22 @@ export default function Search({
           </div>
         </div> */}
 
-        {/* Input row */}
+        {/* Input suche*/}
         <div className="flex gap-3">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="artworks suchen ..."
-            className="
-            flex-1
-            rounded-full
-            px-4
-            py-3
-            bg-transparent
-            border
-            border-(--color-dark)
-            text-vanilla
-            placeholder:text-vanilla/40
-            focus:outline-none
-            focus:border-vanilla
-          "
+            placeholder="Artworks suchen ..."
+            className=" flex-1 rounded-full px-4 py-3 bg-transparent border border-(--color-dark) focus:outline-none focus:border-(--color-vanilla) "
           />
 
           <button
             onClick={handleSearch}
-            className="
-            px-6
-            rounded-full
-            bg-(--color-lila)
-            text-(--color-dark)
-            font-medium
-          transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95
-          "
+            className=" px-10 rounded-full bg-(--color-lila) text-(--color-dark) font-medium  transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95"
           >
-            Search
+            Suchen
           </button>
         </div>
-
-        {/* Quick picks */}
-        {/* <div className="flex flex-wrap gap-3 text-sm">
-          {[
-            "monet",
-            "picasso",
-            "cats",
-            "portrait",
-            "impressionism",
-            "ukiyo-e",
-          ].map((tag) => (
-            <button
-              key={tag}
-              onClick={() => {
-                setQuery(tag);
-                handleSearch();
-              }}
-              className="
-                px-3
-                py-1.5
-                rounded-full
-                bg-vanilla/10
-                hover:bg-vanilla/20
-                transition
-              "
-            >
-              {tag}
-            </button>
-          ))}
-        </div> */}
       </section>
 
       {/* STATUS */}

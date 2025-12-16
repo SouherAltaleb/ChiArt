@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           {/* Brand + small text */}
           <div className="flex flex-col gap-2">
-            <p className="text-lg font-semibold text-dark">ChiArt</p>
+            <img src="logo.svg" alt="logo" className="w-15" />
             <p className="text-sm text-dark/60 max-w-md">
               Entdecken Sie die Sammlung des Art Institute of Chicago, speichern
               Sie Ihre Favoriten und fügen Sie Ihre Notizen hinzu.

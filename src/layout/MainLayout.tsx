@@ -5,7 +5,7 @@ import Header from "../components/Header";
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen bg-soft-gradient text-dark">
+    <div className="min-h-screen bg-soft-gradient text-(--color-dark)">
       <Header />
       <main className="max-w-7xl mx-auto px-6 py-12">
         <Outlet />
