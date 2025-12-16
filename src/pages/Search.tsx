@@ -49,7 +49,7 @@ export default function Search({
         </div> */}
 
         {/* Input suche*/}
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-col sm:flex-row ">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -59,7 +59,7 @@ export default function Search({
 
           <button
             onClick={handleSearch}
-            className=" px-10 rounded-full bg-(--color-lila) text-(--color-dark) font-medium  transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95"
+            className=" sm:w-auto px-10 py-3 rounded-full bg-(--color-lila) text-(--color-dark) font-medium  transition duration-300 hover:bg-(--color-mint) hover:shadow-lg active:scale-95"
           >
             Suchen
           </button>
