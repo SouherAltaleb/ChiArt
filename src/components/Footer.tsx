@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="h-px w-full bg-(--color-dark) mb-8" />
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          {/* Brand + small text */}
+          {/* Brand + klein text */}
           <div className="flex flex-col gap-2">
             <img src="logo.svg" alt="logo" className="w-15" />
             <p className="text-sm text-dark/60 max-w-md">
