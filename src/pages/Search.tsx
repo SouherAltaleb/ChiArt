@@ -41,13 +41,6 @@ export default function Search({
     <div className="flex flex-col gap-10">
       {/* SUche block*/}
       <section className=" rounded-full  px-8 py-4  flex flex-col gap-6">
-        {/* Header */}
-        {/* <div className="flex items-start justify-between gap-6">
-          <div>
-            <h2 className="text-3xl font-semibold">Explore</h2>
-          </div>
-        </div> */}
-
         {/* Input suche*/}
         <div className="flex gap-3 flex-col sm:flex-row ">
           <input

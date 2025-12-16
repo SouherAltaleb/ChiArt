@@ -20,20 +20,13 @@ export default function ArtworkCard({
   return (
     <div className="flex flex-col gap-3">
       {/* Bild */}
-      <div className="relative h-48 overflow-hidden rounded-xl bg-black/5">
+      <div className="relative h-48 overflow-hidden rounded-xl ">
         {imageUrl ? (
           <img
             src={imageUrl}
             alt={artwork.title}
             loading="lazy"
-            className="
-              h-full
-              w-full
-              object-cover
-              transition
-              duration-300
-              group-hover:scale-105
-            "
+            className=" h-full w-full object-cover  transition  duration-300 group-hover:scale-105"
           />
         ) : (
           <div className="h-full flex items-center justify-center text-sm opacity-60">
